@@ -25,7 +25,7 @@ class HomeState extends State<Home> with TickerProviderStateMixin{
       ).animate(
       CurvedAnimation(
         parent: boxController, 
-        curve: Curves.linear,
+        curve: Curves.easeInOut,
       ),
     );
     boxAnimation.addStatusListener((status) {
@@ -51,9 +51,13 @@ class HomeState extends State<Home> with TickerProviderStateMixin{
    }
 
   onTap(){
+      boxController.stop();
+
       if(catController.status == AnimationStatus.completed){
+        boxController.forward();
         catController.reverse();
       }else if(catController.status == AnimationStatus.dismissed){
+        boxController.stop();
         catController.forward();
       }
   }
@@ -62,7 +66,8 @@ class HomeState extends State<Home> with TickerProviderStateMixin{
   Widget build(context){
     return Scaffold(
     appBar: AppBar(
-      title: Text('Animation!'),
+      title: Text('Hey Ramukutty!'),
+      centerTitle: true,
     ),
     body: GestureDetector(
       child: Center(
